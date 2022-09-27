@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.routers import router
-
+from app.auth.router import router as auth_router
 app = FastAPI(
     title="BasicApp",
     description="Right now it is BasicApp",
@@ -10,3 +10,4 @@ app = FastAPI(
 )
 
 app.include_router(router)
+app.include_router(auth_router)
