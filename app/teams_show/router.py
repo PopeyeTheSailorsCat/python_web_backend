@@ -7,8 +7,8 @@ import db.db_interface as db_int
 router = APIRouter(prefix='/teams')
 
 
-def add_user_to_team(user: User, team_id):
-    pass
+def add_user_to_team(user: User, team_id: int):
+    db_int.put(object_where="Team", object_field="members", action="append", where_id=team_id, data=user)
 
 
 def check_new_team_data(new_team: Team) -> bool:
@@ -32,7 +32,7 @@ def get_all_teams() -> dict:
 
 
 @router.post("/{team_id}/join")
-def join_the_team(user: User, team_id):
+def join_the_team(user: User, team_id: int):
     """
     Endpoint for joining the team for user.
     :param user:
