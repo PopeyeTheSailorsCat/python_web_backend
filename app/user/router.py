@@ -26,6 +26,7 @@ def registration(user: User) -> dict:
     :return:
     """
     try:
+
         if check_user_data(user) and not check_user_exist(user):
             db_int.post(object="User", instance=user)
         return {"Successfully created user": user.name}
