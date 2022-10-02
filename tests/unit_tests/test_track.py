@@ -22,3 +22,4 @@ def test_post_team_to_track():
     track_api.post_team_to_track(test_team, 1)
     len_2 = len(track_api.get_track_by_id(1)["teams"])
     assert len_1+1 == len_2
+    assert test_team in track_api.get_track_by_id(1)["teams"]

@@ -18,8 +18,8 @@ def test_create_new_team():
     assert team not in teams.values()
     team_api.create_new_team(team)
     teams = team_api.get_all_teams()["teams"]
-    assert len(teams) -1 == size_1
-    # assert team in teams.values() # TODO
+    assert len(teams) - 1 == size_1
+    assert team in teams.values()  # TODO
 
 
 def test_join_team():
