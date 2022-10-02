@@ -21,7 +21,8 @@ def get(*args, **kwargs):
 def post(*args, **kwargs):
     class_name = kwargs['object']
     instance = kwargs['instance']
-    db[class_name][len(db) + 1] = {"name": instance.name, "other": "Logic of bd here"}
+    # print(db.keys()) )
+    db[class_name][len(db[class_name]) + 1] = vars(instance)
 
 
 def get_all(*args, **kwargs):
