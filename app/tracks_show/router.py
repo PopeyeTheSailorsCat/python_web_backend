@@ -16,6 +16,10 @@ def add_team_to_track(team: Team, track_id: int):
     db_int.put(object_where="Track", object_field="teams", action="append", where_id=track_id, data=team)
 
 
+def check_track_exist(new_track):
+    return False
+
+
 @router.get('/all')
 def get_all_tracks() -> dict:
     """
@@ -51,5 +55,18 @@ def post_team_to_track(team: Team, track_id: int) -> dict:
     """
     try:
         add_team_to_track(team, track_id)
+    except Exception as ex:
+        return {"Error": str(ex)}
+
+
+@router.post('/new')
+def create_new_track(new_track: Track):
+    """
+        Endpoint for creating new team
+        :return:
+        """
+    try:
+        if not check_track_exist(new_track):
+            db_int.post(object="Track", instance=new_track)
     except Exception as ex:
         return {"Error": str(ex)}
