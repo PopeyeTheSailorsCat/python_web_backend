@@ -3,8 +3,9 @@ from app.contracts.team_contract import Team
 from app.contracts.track_contract import Track
 
 basic_user = {"name": "name", "mail": "mail", "skills": ["skill_1", "skill_2"]}
+another_user = {"name": "John", "mail": "my@mail", "skills": ["live", "talk"]}
 basic_team = {"name": "team_name", "track": "track", "members": [basic_user]}
-USERS = {1: basic_user}
+USERS = {1: basic_user, 2:another_user}
 TEAMS = {1: basic_team}
 TRACKS = {1: {"name": "track_name", "description": "something", "teams": [basic_team]}}
 db = {"Team": TEAMS, "User": USERS, "Track": TRACKS}
