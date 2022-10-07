@@ -28,3 +28,14 @@ Packages installation
 .. code::
 
     poetry install
+
+
+## Tests
+To run unit tests use:
+```commandline
+pytest tests/unit_tests
+```
+To run integration tests:
+```commandline
+pytest tests/integration_tests
+```
