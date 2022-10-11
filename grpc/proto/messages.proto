@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message User {
+  string name = 1;
+  string description = 2;
+  uint32 skill_level = 3;
+}
+
+message TeamRecommendation {
+  string recommended_team = 1;
+}
