@@ -4,7 +4,8 @@ import logging
 
 
 def get_msg(working_channel) -> bytes:
-    _, _, msg = next(working_channel.consume('agency_premium_que'))
+    method_frame, properties, msg = next(working_channel.consume('agency_premium_que'))
+    working_channel.basic_ack(method_frame.delivery_tag)
     return msg
 
 
@@ -17,7 +18,7 @@ def app_process():
 
         while True:
             obj = json.loads(get_msg(channel).decode('utf-8'))
-            logging.warning(obj)
+            logging.warning(f"SPECIAL FOR YOU! We found {obj['name']} with cost: {obj['cost']}")
             # br?eak
     except KeyboardInterrupt:
         channel.close()
