@@ -2,12 +2,10 @@ import pika
 import time
 import json
 import logging
-from apartments import apartments_tread
+from hw5.rabbitmq.apartments import apartments_tread
 
 params = pika.ConnectionParameters(host='localhost', port=5672)
 connection = pika.BlockingConnection(params)
-
-channel = connection.channel()
 
 
 def send_apartment_to_clients(apartment_data: dict) -> None:
@@ -16,6 +14,8 @@ def send_apartment_to_clients(apartment_data: dict) -> None:
     :param apartment_data:
     :return:
     """
+
+    channel = connection.channel()
     logging.info(f"Get new apartment:{apartment_data['name']}")
     ap_type = apartment_data['client']
     if ap_type == 'premium':
@@ -31,8 +31,9 @@ def send_apartment_to_clients(apartment_data: dict) -> None:
         channel.basic_publish(exchange='agency_site', routing_key='default',
                               body=json.dumps(apartment_data, indent=2).encode('utf-8'))
 
+        channel.close()
+
 
 if __name__ == "__main__":
     for ap in apartments_tread:
         send_apartment_to_clients(ap)
-    channel.close()

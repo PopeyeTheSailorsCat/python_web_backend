@@ -9,7 +9,7 @@ def get_msg(working_channel) -> bytes:
     return msg
 
 
-def app_process():
+def app_process(running_test=False):
     params = pika.ConnectionParameters(host='localhost', port=5672)
     connection = pika.BlockingConnection(params)
 
@@ -17,9 +17,12 @@ def app_process():
     try:
 
         while True:
+            logging.warning("SOMETHING")
             obj = json.loads(get_msg(channel).decode('utf-8'))
             logging.warning(f"SPECIAL FOR YOU! We found {obj['name']} with cost: {obj['cost']}")
-            # br?eak
+            if running_test:
+                raise KeyboardInterrupt
+
     except KeyboardInterrupt:
         channel.close()
 
